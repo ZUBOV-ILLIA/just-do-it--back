@@ -1,7 +1,6 @@
 import express from "express";
 import cors from "cors";
-
-import db from "./utils/db.js";
+import todoRouter from "./routes/todo.router.js";
 
 const app = express();
 const port = 3005;
@@ -9,9 +8,7 @@ const port = 3005;
 app.use(cors());
 app.use(express.json());
 
-app.use("/", (req, res) => {
-  res.send("hello");
-});
+app.use("/todos", todoRouter);
 
 app.listen(port, () => {
   console.log(`http://localhost:${port}`);

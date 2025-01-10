@@ -1,0 +1,10 @@
+CREATE DATABASE just_do_it_db;
+
+USE just_do_it_db;
+
+CREATE TABLE todos (
+  id VARCHAR(50) PRIMARY KEY,
+  title VARCHAR(255) NOT NULL,
+  completed BOOLEAN NOT NULL DEFAULT 0
+) DEFAULT CHARSET=utf8mb4;
+
