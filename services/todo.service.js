@@ -11,6 +11,21 @@ const getAll = async () => {
   }
 };
 
+const getOne = async (id) => {
+  try {
+    const [todo] = await db.query(
+      `
+        SELECT * FROM todos
+        WHERE id = '${id}'
+      `
+    );
+
+    return todo[0];
+  } catch (error) {
+    console.error(error);
+  }
+};
+
 const create = async (title) => {
   try {
     const id = uuidv4();
@@ -21,6 +36,8 @@ const create = async (title) => {
         VALUES ('${id}', '${title}')
       `
     );
+
+    return id;
   } catch (error) {
     console.error(error);
   }
@@ -55,6 +72,7 @@ const remove = async (id) => {
 
 export const todoService = {
   getAll,
+  getOne,
   create,
   update,
   remove,

@@ -20,13 +20,10 @@ const create = async (req, res) => {
       return res.status(400).send("Title is required");
     }
 
-    await todoService.create(req.body.title);
+    const createdTodoId = await todoService.create(req.body.title);
+    const todo = await todoService.getOne(createdTodoId);
 
-    if (!todo) {
-      return res.status(500).send("Something went wrong");
-    }
-
-    res.sendStatus(201);
+    res.send(todo);
   } catch (error) {
     console.error(error);
   }
@@ -50,7 +47,7 @@ const update = async (req, res) => {
 
     await todoService.update(req.params.id, req.body);
 
-    res.send(200);
+    res.sendStatus(200);
   } catch (error) {
     console.error(error);
   }
